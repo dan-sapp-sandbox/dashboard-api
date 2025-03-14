@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+import json
 import random
 
 app = FastAPI()
@@ -24,3 +25,14 @@ def read_root():
     return {
       "data": generate_random_numbers(30, 0, 100)
     }
+    
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            response = {"data": generate_random_numbers(30, 0, 100)}
+            await websocket.send_text(json.dumps(response))
+    except WebSocketDisconnect:
+        print("Client disconnected")
