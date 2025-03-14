@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment directories
+.venv/
+venv/
+
+# Vercel deployment settings
+.vercel/
+
+# IDE settings (optional)
+.vscode/
+.idea/
