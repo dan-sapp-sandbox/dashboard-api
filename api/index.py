@@ -42,7 +42,7 @@ def read_root():
       "data": generate_scatterplot_data(30, 0, 100)
     }
     
-@app.websocket("/ws")
+@app.websocket("/ws/scatter")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
